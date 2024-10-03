@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Face Recognition Result</title>
+</head>
+<body>
+    <div class="container">
+        {% if person_found %}
+            <h1 class="title">Person Found!</h1>
+            <p>The video with the recognition result is displayed below:</p>
+            
+            <video controls>
+                <source src="{{ url_for('static', filename=result_file) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        <!-- Add this section to result.html -->
+{% if result_file %}
+<h2 id="result">Recognition Result:</h2>
+<video controls>
+    <source src="{{ url_for('static', filename=result_file) }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<p>Total frames annotated: {{ total_frames }}</p>
+<p>Elapsed time: {{ elapsed_time }} seconds</p>
+{% endif %}
+
+    </div>
+</body>
+</html>

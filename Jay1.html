@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <title>Face Recognition Web Interface</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Face Recognition Web Interface (Real-time)</h1>
+
+        <form action="/generate_realtime" method="post" enctype="multipart/form-data">
+            <label for="target_image">Upload Target Image:</label>
+            <input type="file" name="target_image" accept=".jpg, .jpeg, .png, .gif" required>
+            <br>
+            <label for="video">Upload Video:</label>
+            <input type="file" name="video" accept=".mp4" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if result == 'realtime' %}
+            <h2 id="result">Real-time Face Recognition Result:</h2>
+            <div id="realtime-container"></div>
+
+            <script>
+                var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
+                socket.on('update_frame', function(data) {
+                    if (data.image === 'done') {
+                        $('#realtime-container').append('<p>Processing done</p>');
+                    } else {
+                        $('#realtime-container').html('<img src="data:image/png;base64,' + data.image + '" />');
+                    }
+                });
+            </script>
+        {% endif %}
+    </div>
+</body>
+</html>

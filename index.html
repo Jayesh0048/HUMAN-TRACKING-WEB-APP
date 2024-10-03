@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
+    <title>Face Recognition Web Interface</title>
+    <script>
+        function showNotification(message, isSuccess) {
+            var notificationClass = isSuccess ? 'success' : 'error';
+            $('<div/>', {
+                class: 'notification ' + notificationClass,
+                text: message
+            }).appendTo('body').fadeIn().delay(3000).fadeOut();
+        }
+    </script>
+    
+</head>
+<body>
+    <div class="container">
+        <h1 class="title"><b>🕵️ <i>LETS FIND THE LOST CAUSE! </i>🕵️</b></h1>
+
+        <form action="/generate" method="post" enctype="multipart/form-data">
+            <label for="target_image">Upload Target Image:</label>
+            <input type="file" name="target_image" accept=".jpg, .jpeg, .png, .gif" required>
+            <br>
+            <label for="video">Upload Video:</label>
+            <input type="file" name="video" accept=".mp4" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        
+        {% if result_file %}
+            <h2 id="result">Recognition Result:</h2>
+            <video controls>
+                <source src="{{ url_for('static', filename=result_file) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {% endif %}
+            
+    </div>
+</body>
+</html>
