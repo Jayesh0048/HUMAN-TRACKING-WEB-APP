@@ -1,30 +1,100 @@
-Face Recognition Web Interface
-This project is a web interface for real-time face recognition using Flask, face_recognition, and imageio. It allows users to upload a target image and a video, then processes the video to find and annotate faces that match the target image.
+🧍‍♂️ Human Tracking & Alert Notification Web Application
 
-Features
-Upload target image and video for face recognition.
-Real-time face recognition with results displayed in the browser.
-Annotated video output with recognized faces highlighted.
-User-friendly web interface with responsive design.
-Technologies Used
-Flask: A lightweight WSGI web application framework in Python.
-face_recognition: A library for face detection and recognition.
-imageio: A library for reading and writing images and videos.
-PIL (Pillow): Python Imaging Library for image processing.
-HTML/CSS: For front-end design.
-JavaScript: For real-time updates and client-side scripting.
-Socket.IO: For real-time communication between the server and client.
-Theory
-Face Recognition Process
-Face Detection: The first step involves detecting faces in an image or video frame. The face_recognition library uses Histogram of Oriented Gradients (HOG) and Convolutional Neural Networks (CNN) to detect faces.
+A real-time human tracking web application that identifies a specific person using a reference image and monitors nearby camera feeds to detect their presence.
+When the person is detected, the system automatically sends an email alert to the user or administrator.
 
-Encoding Faces: Once faces are detected, the library encodes the faces into a 128-dimensional face embedding using a pre-trained neural network. This encoding is a numerical representation of the face's features.
+🚀 Project Overview
 
-Comparing Faces: The face encoding of the target image is compared with the encodings of the faces detected in the video frames. This comparison is done using a distance metric (Euclidean distance) to find matches.
+This application is designed to track a particular individual by comparing a provided reference image with live or nearby camera feeds.
+Once the system recognizes the person in the camera frame, it triggers an instant email notification, making it useful for security, monitoring, and alert-based applications.
 
-Annotating Faces: When a face in the video matches the target image, the frame is annotated with rectangles around the detected faces and a label indicating a match.
+🎯 Key Features
 
-Real-Time Processing
-Web Interface: The Flask web application serves the HTML/CSS/JavaScript front-end, allowing users to upload images and videos.
-Socket.IO: Enables real-time communication between the client and server, providing instant feedback on the face recognition process.
-Video Processing: The video is processed frame by frame to detect and annotate faces. The processed frames are then compiled into an output video that is displayed on the web interface.
+Upload reference image of a person
+Real-time human detection using camera feed
+Face matching with stored reference image
+Automatic email alerts on successful detection
+Web-based interface for monitoring and control
+
+📸 How the System Works
+1️⃣ Reference Image Registration
+
+User uploads an image of the person to be tracked
+Facial features are extracted and stored
+The image is linked to a specific tracking request
+
+2️⃣ Live Camera Monitoring
+
+The system continuously monitors nearby or connected cameras
+Each frame is analyzed for human presence
+Detected faces are compared with the reference image
+
+3️⃣ Person Detection & Matching
+
+If a match is found:
+Identity is confirmed
+Timestamp and camera details are recorded
+Detection confidence is evaluated
+
+4️⃣ Email Alert System
+
+Once detection is confirmed:
+Email notification is sent to the user/admin
+Alert includes detection time and camera information
+Prevents repeated alerts for the same event
+
+📧 Notification System
+
+Email-based alert mechanism
+Configurable recipient (user or admin)
+Triggered only on valid detections
+Designed to avoid duplicate alerts
+
+🖥️ Web Dashboard
+
+The web interface allows users to:
+Upload and manage reference images
+Start or stop tracking sessions
+View detection status
+Monitor camera feed
+Manage email alert settings
+
+🏗️ Tech Stack (High-Level)
+Backend: FastAPI / Django
+Frontend: Web-based UI
+Computer Vision: Face detection and recognition
+AI/ML: Face embedding and similarity matching
+Email Service: SMTP / Email API
+
+🔐 Security & Privacy
+
+Secure handling of uploaded images
+Role-based access to tracking controls
+No unnecessary storage of camera footage
+Privacy-aware design
+
+📌 Use Cases
+
+Security and surveillance systems
+Missing person tracking
+Office or campus monitoring
+Restricted area access alerts
+Smart surveillance applications
+
+🌱 Future Enhancements
+
+Multi-camera tracking
+Real-time SMS / push notifications
+Cloud deployment
+Face re-identification across cameras
+Improved accuracy with deep learning models
+
+👨‍💻 Author
+
+Jayesh Naidu
+Machine Learning Engineer | Computer Vision Enthusiast
+Focused on real-time AI systems and intelligent surveillance solutions
+
+⭐ Support
+
+If you find this project useful, consider giving it a ⭐ on GitHub.
